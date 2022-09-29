@@ -54,14 +54,14 @@
       yum:
         name: nodejs
         state: present
-	- name: Install nginx package
+    - name: Install nginx package
       yum:
         name: nginx
         state: present
     - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
-	- name: Install React JS package
-	  command: npm install -g create-react-app
+    - name: Install React JS package
+      command: npm install -g create-react-app
     # Install all the necessary Node modules for the project,
     # using `npm`.
     - name:  Bundles the app into static files for production
