@@ -54,16 +54,20 @@
       yum:
         name: nodejs
         state: present
-    - name: Update and upgrade apt packages
-      wget:
-         update_cache: yes
-         upgrade: yes
-    - name: ensure nginx is at the latest version
-      wget: name=nginx state=latest
-    - name: start nginx
-      service:
-          name: nginx
-          state: started 
+    - name: install EPEL repo
+      yum_repository:
+        baseurl: https://dl.fedoraproject.org/pub/epel/7Server/x86_64/
+        description: "Epel release."
+        name: epel-release
+        state: present
+	- name: install updates
+      yum: name=* state=latest
+    - name: install nginx
+      become: yes
+      yum: name=nginx state=latest
+    - name: starting nginx
+      become: yes
+      service: name=nginx state=started
     - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
     - name: Install React JS package
