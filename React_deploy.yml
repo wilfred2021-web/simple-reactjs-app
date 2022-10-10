@@ -60,7 +60,7 @@
         description: "Epel release."
         name: epel-release
         state: present
-	- name: install updates
+    - name: install updates
       yum: name=* state=latest
     - name: install nginx
       become: yes
