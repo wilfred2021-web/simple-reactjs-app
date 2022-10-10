@@ -44,10 +44,16 @@
       copy:
         src: ./
         dest: "{{ dest_path }}"
-   #enable EPEL repo by installing the epel-release package
-    - name: install EPEL repo
-      become: yes
-      yum: name=epel-release state=present
+    # Install NodeJS library
+    # using multiple shell commands
+    - name: Install Nodejs & ExpressJS
+      shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
+    # If other package are required mention the package name in "name"
+    # eg: ngix, curl, wget, apache2, nodejs
+    - name: Install reqired packages
+      yum:
+        name: nodejs
+        state: present
    #Nginx update packages and intall Nginx
     - name: install updates
       yum: name=* state=latest
@@ -57,19 +63,10 @@
     - name: starting nginx
       become: yes
       service: name=nginx state=started
-    #using multiple shell commands
-    - name: Install Nodejs & ExpressJS
-      shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
-    #If other package are required mention the package name in "name"
-    #eg: ngix, curl, wget, apache2, nodejs
-    - name: Install reqired packages
-      yum:
-        name: nodejs
-        state: present
-    - name: Install nginx package
-      yum:
-        name: nginx
-        state: present
+  #enable EPEL repo by installing the epel-release package
+    - name: install EPEL repo
+      become: yes
+      yum: name=epel-release state=present
     - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
     - name: Install React JS package
