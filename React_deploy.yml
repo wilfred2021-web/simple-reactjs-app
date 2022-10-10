@@ -44,11 +44,11 @@
       copy:
         src: ./
         dest: "{{ dest_path }}"
-   	#enable EPEL repo by installing the epel-release package
+   #enable EPEL repo by installing the epel-release package
     - name: install EPEL repo
       become: yes
       yum: name=epel-release state=present
-	#Nginx update packages and intall Nginx
+   #Nginx update packages and intall Nginx
     - name: install updates
       yum: name=* state=latest
     - name: install nginx
