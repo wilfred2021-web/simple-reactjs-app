@@ -56,8 +56,8 @@
         state: present
     - name: Update and upgrade apt packages
       wget:
-        update_cache: yes
-        upgrade: yes
+         update_cache: yes
+         upgrade: yes
     - name: ensure nginx is at the latest version
       wget: name=nginx state=latest
     - name: start nginx
