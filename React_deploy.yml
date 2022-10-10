@@ -54,15 +54,16 @@
       yum:
         name: nodejs
         state: present
-    - name: To install Nginx
-      yum:
-        name: nginx-1.19.0
-        state: present
-    - name: To enable and start Nginx
+    - name: Update and upgrade apt packages
+      wget:
+        update_cache: yes
+        upgrade: yes
+    - name: ensure nginx is at the latest version
+      wget: name=nginx state=latest
+    - name: start nginx
       service:
-        name: nginx-1.19.0
-        state: started
-        enabled: yes	  
+          name: nginx
+          state: started 
     - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
     - name: Install React JS package
