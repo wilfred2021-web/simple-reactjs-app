@@ -64,8 +64,7 @@
       service:
           name: nginx
           state: started
-	  
-    - name: Install development tools To compile and install native addons from npm
+   - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
     - name: Install React JS package
       command: npm install -g create-react-app
