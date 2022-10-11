@@ -7,25 +7,7 @@
     repo_path: nrbaskar/hariapp:{{DOCKER_TAG}}
     dest_path: /home/ec2-user/{{DOCKER_TAG}}
   tasks:
-  - name: Install EPEL repository
-  yum:
-    name: epel-release
-    state: present
-
-- name: Ensure EPEL repo is enabled
-  ini_file:
-    dest: /etc/yum.repos.d/epel.repo
-    section: epel
-    option: enabled
-    value: '1'
-
-- name: Conduct yum update 
-  yum: 
-    name: update
-    state: latest
-    become: True
-    update_cache: True
-    # Install python pip
+     # Install python pip
     - name: Install python pip
       yum:
         name: python-pip
