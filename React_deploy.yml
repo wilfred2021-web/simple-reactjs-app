@@ -55,9 +55,7 @@
         name: nodejs
         state: present
     - name: install EPEL release packages
-      yum:
-	name: epel-release
-	state: present
+      yum: epel-release state: present
     - name: install nginx
       become: yes
       yum: name=nginx state=latest
