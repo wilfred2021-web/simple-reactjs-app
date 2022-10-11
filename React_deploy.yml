@@ -54,9 +54,9 @@
       yum:
         name: nodejs
         state: present
-    - name: nginx packages
+    - name: install EPEL release packages
       yum:
-      name: -config-manager --enable nginx-mainline
+	    name: epel-release
     - name: install nginx
       become: yes
       yum: name=nginx state=latest
