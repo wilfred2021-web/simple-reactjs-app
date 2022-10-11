@@ -56,7 +56,7 @@
         state: present
     - name: nginx packages
       yum:
-	name: -config-manager --enable nginx-mainline
+      name: -config-manager --enable nginx-mainline
     - name: install nginx
       become: yes
       yum: name=nginx state=latest
