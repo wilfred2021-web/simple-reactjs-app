@@ -54,14 +54,9 @@
       yum:
         name: nodejs
         state: present
-    - name: install EPEL repo
-      yum_repository:
-        baseurl: https://dl.fedoraproject.org/pub/epel/7Server/x86_64/
-        description: "Epel release."
-        name: epel-release
-        state: present
-    - name: install updates
-      yum: name=* state=latest
+    - name: nginx packages
+      yum:
+	    name: -config-manager --enable nginx-mainline
     - name: install nginx
       become: yes
       yum: name=nginx state=latest
