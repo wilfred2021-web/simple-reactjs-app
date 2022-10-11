@@ -60,7 +60,7 @@
         state: present
     - name: To enable and start Nginx
     service:
-      name: nginx-1.18.0
+      name: nginx
       state: started
       enabled: yes
     - name: Install development tools To compile and install native addons from npm
