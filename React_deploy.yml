@@ -56,7 +56,8 @@
         state: present
     - name: install EPEL release packages
       yum:
-	    name: epel-release
+	name: epel-release
+	state: present
     - name: install nginx
       become: yes
       yum: name=nginx state=latest
