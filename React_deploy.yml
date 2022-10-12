@@ -84,7 +84,7 @@
         image: "nrbaskar/hariapp:{{DOCKER_TAG}}"
         state: started
         published_ports:
-          - 0.0.0.0:8085:8080
-          - 0.0.0.0:8086:8080
+          - 0.0.0.0:8087:8080
+          - 0.0.0.0:8088:8080
       args:
         chdir: "{{ dest_path }}"
