@@ -60,10 +60,10 @@
         name: nginx
         state: present
     - name: To enable and start Nginx
-    service:
-      name: nginx
-      state: started
-      enabled: yes
+      service:
+        name: nginx
+        state: started
+        enabled: yes
     - name: Install development tools To compile and install native addons from npm
       command: install gcc-c++ make -y
     - name: Install React JS package
