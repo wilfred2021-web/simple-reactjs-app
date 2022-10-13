@@ -63,15 +63,12 @@
       service:
         name: nginx
         state: started
-    - name: Install development tools To compile and install native addons from npm
-      command: install gcc-c++ make -y
     - name: Install React JS package
-      command: npm install -g create-react-app
-    # Install all the necessary Node modules for the project,
-    # using `npm`.  # Install all the necessary Node modules for the project,
+      command: npm install -g create-react-app my-app
+    # Install all the necessary Node modules for the project, using `npm`
     - name: Install project dependencies
       command: npm install
-      # Install all the necessary Node modules for the project,using `npm`.
+    # Install all the necessary Node modules for the project,using `npm`.
     - name: Install project dependencies
       command: npm install
     - name:  Bundles the app into static files for production
