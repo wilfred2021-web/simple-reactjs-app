@@ -75,7 +75,7 @@
     # Bundles the app into static files
     - name:  Bundles the app into static files for production
       command: npm run build
-      command: npm run test
+    # command: npm run test
       args:
         chdir: "{{ dest_path }}"
     - name: Start the container
