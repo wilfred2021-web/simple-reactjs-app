@@ -65,14 +65,14 @@
         state: started
     - name: Install React JS package
       command: npm install -g create-react-app
-	  - name: Install react-bootstrap
+    - name: Install react-bootstrap
       command: npm install react-bootstrap bootstrap
     # Install all the necessary Node modules for the project,# using `npm`.
     - name: Install project dependencies
-		  yum:
-		    name: npm
-		    state: present
-	  - name: start npm
+      yum:
+	name: npm
+	state: present
+    - name: start npm
       service:
         name: npm
         state: started
