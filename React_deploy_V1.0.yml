@@ -66,7 +66,7 @@
     - name: Install React JS package
       command: npm install -g create-react-app
     - name: Install react-bootstrap
-      command: npm install react-bootstrap bootstrap
+      command: npm install bootstrap simple-reactjs-app
     # Install all the necessary Node modules for the project,# using `npm`.
     - name: Install project dependencies
       yum:
