@@ -67,9 +67,16 @@
       command: npm install -g create-react-app
     # Install all the necessary Node modules for the project,# using `npm`.
     - name: Install project dependencies
-      command: npm install
-    - name:  Bundles the app into static files for production
-      command: npm run build
+		yum:
+		  name: npm
+		  state: present
+	- name: start npm
+      service:
+        name: npm
+        state: started
+    # command: npm install
+    # - name:  Bundles the app into static files for production
+    # command: npm run build
       args:
         chdir: "{{ dest_path }}"
     - name: Start the container
