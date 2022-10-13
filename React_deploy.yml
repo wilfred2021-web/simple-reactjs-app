@@ -67,10 +67,10 @@
       command: npm install -g create-react-app
     # Install all the necessary Node modules for the project,# using `npm`.
     - name: Install project dependencies
-		yum:
-		  name: npm
-		  state: present
-	- name: start npm
+      yum:
+        name: npm
+        state: present
+    - name: start npm
       service:
         name: npm
         state: started
