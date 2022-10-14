@@ -74,8 +74,8 @@
     # Install all the necessary Node modules for the project,# using `npm`.
       command: npm install
     # Bundles the app into static files
-    - name:  Bundles the app into static files for production
-      command: npm run build
+    #- name:  Bundles the app into static files for production
+    #  command: npm run build
     # command: npm run test
       args:
         chdir: "{{ dest_path }}"
