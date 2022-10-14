@@ -69,7 +69,7 @@
       command: npm install bootstrap
       command: npm install axios
       command: npm install react-dom
-      ommand: npm install react react-dom
+      command: npm install react react-dom
       command: npm install react-scripts
     # Install all the necessary Node modules for the project,# using `npm`.
       command: npm install
