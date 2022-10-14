@@ -87,5 +87,3 @@
         published_ports:
           - 0.0.0.0:8087:8080
           - 0.0.0.0:8088:8080
-      args:
-        chdir: "{{ dest_path }}"
