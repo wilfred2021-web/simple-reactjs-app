@@ -79,11 +79,23 @@
     # command: npm run test
       args:
         chdir: "{{ dest_path }}"
-    - name: Start the container
-      docker_container:
-        name: hariapp
-        image: "nrbaskar/hariapp:{{DOCKER_TAG}}"
-        state: started
-        published_ports:
-          - 0.0.0.0:8087:8080
-          - 0.0.0.0:8088:8080
+     # Install Forever tool.
+    # This tool is used to run the Node server in background
+    # and keep tracking of the running process
+    - name: Install PM2
+      npm: name=pm2 global=yes state=present
+    # is already running (avoids restarting the service on each playbook
+    # execution)
+    - name: Get Forever's list of running processes
+      command: pm2 status
+      register: pm2_status
+      changed_when: false
+    # Start the node server using "Foverer"
+    # The `when` clause identifies if the server is already
+    # running. If so, this task is skipped
+    - name: Kill pm2 service
+      command: pm2 kill
+    - name: Start service
+      command: pm2 start app.js --name "{{DOCKER_TAG}}-Service"
+      args:
+        chdir: "{{ dest_path }}"
