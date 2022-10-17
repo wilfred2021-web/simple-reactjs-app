@@ -84,6 +84,10 @@
     # and keep tracking of the running process
     - name: Install PM2
       npm: name=pm2 global=yes state=present
+       - name: pm2 start app.js
+      service:
+        name: pm2
+        state: started
     # is already running (avoids restarting the service on each playbook
     # execution)
     - name: Get Forever's list of running processes
