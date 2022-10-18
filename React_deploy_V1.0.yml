@@ -93,10 +93,10 @@
     # Start the node server using "Foverer"
     # The `when` clause identifies if the server is already
     # running. If so, this task is skipped
-   #  - name: Kill pm2 service
-     # command: pm2 kill
+    - name: Kill pm2 service
+      command: pm2 kill
     - name: Start service
-      command: pm2 serve build 8082 --spa
-      command: pm2 start App.js --name "{{DOCKER_TAG}}-Service"
+    #  command: pm2 serve build 8082 --spa
+     # command: pm2 start App.js --name "{{DOCKER_TAG}}-Service"
       args:
         chdir: "{{ dest_path }}"
