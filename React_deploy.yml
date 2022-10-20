@@ -55,14 +55,6 @@
       yum:
         name: nodejs
         state: present
-    - name: install and start nginx
-      yum:
-        name: nginx
-        state: latest
-    - name: start nginx
-      service:
-        name: nginx
-        state: started
     - name: Install React JS package
       command: npm install -g create-react-app
     # Install all the necessary Node modules for the project,# using `npm`.
