@@ -1,1 +1,103 @@
+---
+- name: Staging server Deployment
+  hosts: stageserver
+  become_user: root
+  become: True
+  vars:
+    repo_path: nrbaskar/hariapp:{{DOCKER_TAG}}
+    dest_path: /home/ec2-user/{{DOCKER_TAG}}
+    
+  tasks:
+     # Install python pip
+    - name: Install python pip
+      yum:
+        name: python-pip
+        state: present
+    # Install docker service 
+    - name: Install docker
+      yum:
+        name: docker
+        state: present
+    # Start the docker service
+    - name: start docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    # Install docker-python Module
+    - name: Install docker-py python module
+      pip:
+        name: docker-py
+        state: present
+    #Pull Docker Image    
+    - name: Pull docker image
+      docker_image:
+        name: nrbaskar/hariapp
+        tag: "{{DOCKER_TAG}}"
+        source: pull
+    #Create a Directory
+    - name: create directory
+      file:
+        state: directory
+        dest: "{{ dest_path }}"
+    #Copy Files
+    - name: Copy website to the host
+      copy:
+        src: ./
+        dest: "{{ dest_path }}"
+    # Install NodeJS library
+    # using multiple shell commands
+    - name: Install Nodejs & ExpressJS
+      shell: 'curl --silent --location https://rpm.nodesource.com/setup_16.x | bash -'
+    # If other package are required mention the package name in "name"
+    # eg: ngix, curl, wget, apache2, nodejs
+    - name: Install reqired packages
+      yum:
+        name: nodejs
+        state: present
+    - name: install and start nginx
+      yum:
+        name: nginx
+        state: latest
+    - name: start nginx
+      service:
+        name: nginx
+        state: started
+    - name: Install React JS package
+      command: npm install -g create-react-app
+    - name: Install react-dependencies
+      command: npm install bootstrap
+      command: npm install axios
+      command: npm install react-dom
+      command: npm install react react-dom
+      command: npm install react-scripts
+    # Install all the necessary Node modules for the project,# using `npm`.
+      command: npm install
+    # Bundles the app into static files
+    #- name:  Bundles the app into static files for production
+    #  command: npm run build
+    # command: npm run test
+      args:
+        chdir: "{{ dest_path }}"
+     # Install Forever tool.
+    # This tool is used to run the Node server in background
+    # and keep tracking of the running process
+    - name: Install PM2
+      npm: name=pm2 global=yes state=present
+    # is already running (avoids restarting the service on each playbook
+    # execution)
+    - name: Get Forever's list of running processes
+      command: pm2 status
+      register: pm2_status
+      changed_when: false
+    # Start the node server using "Foverer"
+    # The `when` clause identifies if the server is already
+    # running. If so, this task is skipped
+    - name: Kill pm2 service
+      command: pm2 kill
+    - name: Start service
+      command: pm2 serve build 8082 --spa
+      command: pm2 start ./src/App.js --name "{{DOCKER_TAG}}-Service"
+      args:
+        chdir: "{{ dest_path }}"
 
