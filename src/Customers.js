@@ -17,6 +17,10 @@ export default class Customers extends Component {
   componentDidMount() {
     this.getCustomerData();
   }
+  //function which is called the first time the component loads
+  componentDidMount() {
+    this.getCustomerData();
+  }
 
   //Function to get the Customer Data from json
   getCustomerData() {
