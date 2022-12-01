@@ -51,6 +51,8 @@ export default class Customers extends Component {
       </div>
       <div className="col-md-6">
         <CustomerDetails val={this.state.selectedCustomer}/>
+          <CustomerDetails val={this.state.selectedCustomer}/>
+            <CustomerDetails val={this.state.selectedCustomer}/>
       </div>
     </div>)
   }
